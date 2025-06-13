@@ -1,0 +1,24 @@
+# Ignore local .terraform folder (Terraform's downloaded modules/providers)
+.terraform/
+
+# Ignore Terraform lock file (optional: include if sharing consistent versions is needed)
+.terraform.lock.hcl
+
+# Ignore Terraform state files
+*.tfstate
+*.tfstate.backup
+
+# Ignore any override configurations (optional local testing)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore sensitive input variable files
+*.auto.tfvars
+*.tfvars
+
+# Ignore secrets or environment files (if any)
+*.pem
+*.key
+.env
