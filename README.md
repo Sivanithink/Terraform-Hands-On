@@ -315,4 +315,92 @@ override.tf.json
 .env
 
 ```
+---
+# Terraform AWS Assignments – Reusable Module and Two-Tier Architecture
+
+
+
+##  Assignment 02 – Reusable EC2 Web Server Module
+
+###  What This Assignment Is About
+
+In this task, the goal is to convert a normal EC2 instance configuration into a reusable **Terraform module**. That means, instead of hardcoding the EC2 setup every time, we can just use this module and pass values like AMI ID, instance type, etc., to create multiple EC2 instances easily.
+
+### What This Setup Contains
+
+- A **module folder** was created for the EC2 logic. It contains:
+  - `main.tf`: where the EC2 resource is defined
+  - `variables.tf`: all dynamic values like AMI, subnet, instance type, etc.
+  - `outputs.tf`: exposes things like instance ID and public IP
+  
+- In the **main root folder** (outside the module), the rest of the infrastructure is handled:
+  - VPC
+  - Subnet
+  - Internet gateway
+  - Route table
+  - Security group
+  - And finally, the module is called with required values.
+
+###  Why This Matters
+
+- This kind of setup makes the code **reusable** and **clean**.
+- You don’t need to repeat EC2 logic everywhere — just call the module.
+- Changes can be made in one place, and used across multiple environments.
+
+---
+
+##  Assignment 03 – Two-Tier Architecture (Web + DB)
+
+###  What This Assignment Is About
+
+Here, the goal is to build a more **realistic and secure** infrastructure setup — something that you’d actually use in production. It’s a **two-tier architecture** where the frontend (web server) is in a public subnet, and the backend (database) is in a private subnet.
+
+###  What This Setup Contains
+
+- **VPC** with two subnets:
+  - Public subnet → for EC2 web server
+  - Private subnet → for RDS database
+
+- **Internet gateway** for public subnet (so EC2 can be accessed from the internet)
+
+- **NAT gateway** in public subnet → used so that private resources (like RDS) can reach the internet **only for updates**, but cannot be accessed from outside
+
+- **Route tables**:
+  - Public subnet routes through internet gateway
+  - Private subnet routes through NAT gateway
+
+- **Security groups**:
+  - Web server SG → allows SSH (22) and HTTP (80) from internet
+  - DB SG → allows traffic only from EC2’s SG, and only on MySQL port (3306)
+
+- **EC2 instance** in public subnet
+- **RDS MySQL database** in private subnet
+- **Sensitive variables** used for storing DB credentials securely
+
+###  How Security Is Handled
+
+- Only the EC2 instance can talk to the database.
+- Database is not exposed to the public at all.
+- This follows the best practice of **least privilege** access.
+
+---
+
+##  What This Helped Me Understand
+
+
+- How **Terraform modules** work and why they are useful
+- How to **separate compute and networking** cleanly
+- How to design a **secure two-tier network** with public and private subnets
+- When to use an **internet gateway vs NAT gateway**
+- How to properly write **security group rules**
+- Importance of using **variables and outputs** in Terraform
+
+---
+
+##  Final Summary
+
+- Write reusable Terraform code using modules
+- Design real-world cloud architectures
+- Handle networking, security, and routing properly
+- Structure Terraform code in a clean and manageable way
 
