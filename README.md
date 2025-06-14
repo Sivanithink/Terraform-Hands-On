@@ -272,11 +272,11 @@ Visit the URL to verify your static site is live.
   <p>Assignment 1 is a success.</p>
 </body>
 </html>
-![Screenshot (107)](https://github.com/user-attachments/assets/af09bad6-a7f6-4081-9f9c-8a8b0c0b17fa)
-![Screenshot (106)](https://github.com/user-attachments/assets/757318a5-4f25-441f-8b77-eac130790e13)
+
 
 ```
-
+![Screenshot (107)](https://github.com/user-attachments/assets/af09bad6-a7f6-4081-9f9c-8a8b0c0b17fa)
+![Screenshot (106)](https://github.com/user-attachments/assets/757318a5-4f25-441f-8b77-eac130790e13)
 ## ✅ What I Learned
 
 - How to configure an S3 bucket for static site hosting  
