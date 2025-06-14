@@ -85,7 +85,7 @@ You should see the message:
 This confirms that your EC2 instance is running, Apache is installed, and the networking is correctly configured.
 ![Screenshot (102)](https://github.com/user-attachments/assets/1b5b9a65-4942-49a7-8a54-e0c61d86f94c)
 
-![alt text](../Terraform-Hands-On/screenshots/Screenshot%202025-06-12%20233707.png)
+![alt text](screenshots/test.png)
 
 
 ---
@@ -217,8 +217,8 @@ In this task, the goal is to convert a normal EC2 instance configuration into a 
 - When to use an **internet gateway vs NAT gateway**
 - How to properly write **security group rules**
 - Importance of using **variables and outputs** in Terraform
-![alt text](../Terraform-Hands-On/screenshots/terraform%202nd%201.png)
-![alt text](../Terraform-Hands-On/screenshots/terraform%202nd%202.png)
+![alt text](screenshots/terraform%202nd%201.png)
+![alt text](screenshots/terraform%202nd%202.png)
 ---
 
 
