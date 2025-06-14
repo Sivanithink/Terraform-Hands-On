@@ -258,6 +258,7 @@ website_endpoint = http://nithin-kamisetty-website-7613.s3-website.ap-south-1.am
 
 ```
 Visit the URL to verify your static site is live.
+![Screenshot (104)](https://github.com/user-attachments/assets/90477a56-e1c9-4966-a26d-eb5919a41365)
 
 ## 📄 Sample HTML File (index.html)
 
