@@ -96,9 +96,10 @@ You should see the message:
 **Hello World from Terraform!**
 
 This confirms that your EC2 instance is running, Apache is installed, and the networking is correctly configured.
-![Screenshot (102)](https://github.com/user-attachments/assets/031ef173-3228-4c86-bc9c-44bf2864f6bc)
+![Screenshot (102)](https://github.com/user-attachments/assets/1b5b9a65-4942-49a7-8a54-e0c61d86f94c)
 
-![Screenshot (101)](https://github.com/user-attachments/assets/00fd54bb-3b4a-4f53-81d4-52d59decd99b)
+![Screenshot (101)](https://github.com/user-attachments/assets/69c1c168-1e07-42d0-b00a-91c7e36d74f8)
+
 In the screenshot above, the web server returns a **"401 - Unauthorized"** message. This happened because the user data script tried to access the EC2 instance metadata (like instance ID) **without using the required authentication token**.
 
 AWS now uses **IMDSv2 (Instance Metadata Service v2)**, which requires a session token to access metadata. Since the script used the older method (IMDSv1), the request was denied with a 401 Unauthorized response.
@@ -165,4 +166,138 @@ Also remember to manually delete:
 
 
 ---
+
+
+# Assignment 01 – Deploy a Static Website on AWS S3 Using Terraform
+
+This assignment demonstrates how to provision and host a static website on AWS S3 using Terraform. It is part of a DevOps hands-on project aimed at strengthening Infrastructure as Code (IaC) skills using real AWS resources.
+
+## 📁 Folder Structure
+
+assignment-01-s3-static-website/  
+├── main.tf  
+├── variables.tf  
+├── outputs.tf  
+├── index.html  
+├── .terraform/                 # Ignored in Git  
+├── .terraform.lock.hcl  
+├── terraform.tfstate*         # Ignored in Git  
+├── terraform.tfstate.backup*  # Ignored in Git  
+
+## 🌐 What This Project Does
+
+- Creates an **S3 bucket** with a globally unique name  
+- Configures the bucket for **public access** and **static website hosting**  
+- Uploads a local `index.html` file to the bucket  
+- Outputs the public website URL after provisioning  
+
+## 🛠 Technologies Used
+
+- **Terraform** – for infrastructure provisioning  
+- **AWS S3** – for static website hosting  
+- **HTML** – to render basic content  
+
+## 🚀 How to Deploy
+
+### Step 1: Customize Variables
+
+In `variables.tf`, set your AWS region and specify a unique bucket name:
+
+```hcl
+variable "aws_region" {
+  default = "ap-south-1" # or your desired region
+  type = string
+}
+
+variable "bucket_name" {
+  default = "nithin-kamisetty-website-7613"
+  type       = string
+
+}
+
+variable "aws_profile" {
+   default = "AdminAccess-644608486460"
+   type = string
+}
+
+```
+![Screenshot (105)](https://github.com/user-attachments/assets/435c7bd4-ee0f-4e9d-af3c-5ba468ef4fae)
+
+
+To override from CLI:  
+```bash
+terraform apply
+```
+
+### Step 2: Initialize Terraform
+
+```bash
+terraform init
+```
+
+### Step 3: Review the Plan
+
+```bash
+terraform plan
+```
+
+### Step 4: Apply and Deploy
+
+```bash
+terraform apply
+```
+
+Approve with `yes` when prompted.
+
+### Step 5: Access the Website
+
+After successful deployment, Terraform will display the public website endpoint:  
+Example:
+```
+website_endpoint = http://nithin-kamisetty-website-7613.s3-website.ap-south-1.amazonaws.com
+
+```
+Visit the URL to verify your static site is live.
+
+## 📄 Sample HTML File (index.html)
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My First Terraform Website</title>
+</head>
+<body>
+  <h1>This website was deployed using Terraform!</h1>
+  <p>Assignment 1 is a success.</p>
+</body>
+</html>
+![Screenshot (107)](https://github.com/user-attachments/assets/af09bad6-a7f6-4081-9f9c-8a8b0c0b17fa)
+![Screenshot (106)](https://github.com/user-attachments/assets/757318a5-4f25-441f-8b77-eac130790e13)
+
+```
+
+## ✅ What I Learned
+
+- How to configure an S3 bucket for static site hosting  
+- How to upload files via `aws_s3_object` in Terraform  
+- How to write modular, readable Terraform code  
+- How to output the hosted URL via `outputs.tf`  
+- How to structure Terraform code using variables and remote state  
+
+## 🧹 .gitignore (Root)
+
+```gitignore
+# Terraform state and cache
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+crash.log
+.terraform.lock.hcl
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+```
 
