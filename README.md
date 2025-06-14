@@ -289,16 +289,30 @@ Visit the URL to verify your static site is live.
 ## 🧹 .gitignore (Root)
 
 ```gitignore
-# Terraform state and cache
-**/.terraform/
+# Ignore Terraform state files
 *.tfstate
-*.tfstate.*
-*.tfvars
-crash.log
+*.tfstate.backup
+
+# Ignore Terraform lock file (optional, include if you want reproducible providers)
 .terraform.lock.hcl
+
+# Ignore the .terraform directory (provider binaries/modules)
+.terraform/
+
+# Ignore any temporary override config
 override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+
+# Ignore sensitive variable files
+*.auto.tfvars
+*.tfvars
+
+# Ignore credentials or secrets (if any)
+*.pem
+*.key
+.env
+
 ```
 
